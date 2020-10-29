@@ -37,7 +37,7 @@ import warnings
 
 
 def path_to_common(renpy_base):
-    return renpy_base + "/renpy/common"
+    return None
 
 # Given a directory holding a Ren'Py game, this is expected to return
 # the path to a directory that will hold save files.
