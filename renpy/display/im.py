@@ -259,8 +259,10 @@ class Cache(object):
         # Otherwise, we load the image ourselves.
         if ce is None:
 
-            tries = 2
-            while tries > 0:
+            tries = 1
+            while True:
+                if not predict:
+                    renpy.exports.free_memory()
                 try:
                     if image in self.pin_cache:
                         surf = self.pin_cache[image]
@@ -273,7 +275,7 @@ class Cache(object):
                             surf = image.load()
                     break
                 except Exception as e:
-                    if tries > 0:
+                    if not predict and tries > 0:
                         estr = repr(e)
                         if ("Failed to allocate" in estr) or ("Out of memory" in estr) or ("Failed to decode" in estr):
                             renpy.exports.free_memory()
